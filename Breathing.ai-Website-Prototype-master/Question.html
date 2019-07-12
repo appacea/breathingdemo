@@ -1,0 +1,90 @@
+<html>
+<link rel="stylesheet" type="text/css" href="css/questions.css" />
+<body>
+<center>
+  <div class="container">
+    <div>
+    Which Color Did You Find Most Calming? <br>
+    Rate Each Color From One - Five!
+
+    </div><br>
+
+    <p>Red: <span id="demo" class= "value"></span></p>
+    <input type="range" min="1" max="5" value="1" id="myRange" class="slider">
+
+    <p>Green: <span id="demo2" class= "value"></span></p>
+    <input type="range" min="1" max="5" value="1" id="myRange2" class="slider">
+
+    <p>Blue: <span id="demo3" class= "value"></span></p>
+    <input type="range" min="1" max="5" value="1" id="myRange3" class="slider">
+
+    <p>Gray: <span id="demo4" class= "value"></span></p>
+    <input type="range" min="1" max="5" value="1" id="myRange4" class="slider">
+
+    <p>Yellow: <span id="demo5" class= "value"></span></p> <br> <br>
+    <input type="range" min="1" max="5" value="1" id="myRange5" class="slider">
+
+  </div>
+</center>
+
+
+<form action="page2.html">
+    <input type="submit" value="Next Page" />
+</form>
+</body>
+
+
+  <script>
+
+      var slider = document.getElementById("myRange");
+      var output = document.getElementById("demo");
+      output.innerHTML = slider.value;
+
+      slider.oninput = function value1() {
+        output.innerHTML = this.value;
+        }
+
+      var slider2 = document.getElementById("myRange2");
+      var output2 = document.getElementById("demo2");
+      output2.innerHTML = slider2.value;
+
+      slider2.oninput = function value2(){
+        output2.innerHTML = slider2.value;
+       }
+
+
+      var slider3 = document.getElementById("myRange3");
+      var output3 = document.getElementById("demo3");
+      output3.innerHTML = slider3.value;
+
+      slider3.oninput = function value3() {
+        output3.innerHTML = this.value;
+        }
+
+        var slider4 = document.getElementById("myRange4");
+      var output4 = document.getElementById("demo4");
+      output4.innerHTML = slider4.value;
+
+      slider4.oninput = function value4() {
+        output4.innerHTML = this.value;
+        }
+
+
+      var slider5 = document.getElementById("myRange5");
+      var output5 = document.getElementById("demo5");
+      output5.innerHTML = slider5.value;
+
+      slider5.oninput = function value5() {
+        output5.innerHTML = this.value;
+        }
+
+
+
+        localStorage.setItem("value1", slider.value);
+        localStorage.setItem("value2", slider2.value);
+        localStorage.setItem("value3", slider3.value);
+        localStorage.setItem("value4", slider4.value);
+        localStorage.setItem("value5", slider5.value);
+
+  </script>
+</html>

@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 300px;
+  border-radius: 25px;
+}
+
+body {
+  font-family: arial;
+  width: 100%;
+  min-width: 320px;
+}
+
+header{
+  text-align: center;
+  padding-top: 20px;
+}
+
+section {
+  width: 90%;
+  margin: 20px auto;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+@media only screen and (min-width: 1024px) {
+  article {
+    display: flex;
+  }
+  section {
+    width: 30%;
+  }
+}
+
+section:hover .scroll {
+  top: 0;
+}
+
+.project {
+  width: 100%;
+  display: block;
+  border-radius: 2px;
+}
+
+.scroll {
+  position: absolute;
+  top: 100%;
+  height: 100%;
+  background: rgba(256, 256, 256, 0.8);
+  color: #333;
+/*   display: none; */
+  transition: top 0.6s;
+}
+
+.scroll h1 {
+  padding: 10px;
+  font-size: 20px;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+.scroll p {
+  padding: 10px;
+}

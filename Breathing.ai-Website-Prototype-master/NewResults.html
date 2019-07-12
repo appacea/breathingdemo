@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<div class="cover">
+  <div class="box3d pic1">
+    &nbsp;
+  </div>
+  <div class="box3d pic2">
+    &nbsp;
+  </div>
+</div>
+<div class="cover">
+  <div class="box3d pic3">
+    &nbsp;
+  </div>
+  <div class="box3d pic4">
+    &nbsp;
+  </div>
+</div>
+<div class="cover">
+  <div class="box3d pic3">
+    &nbsp;
+  </div>
+  <div class="box3d pic4">
+    &nbsp;
+  </div>
+</div>
+
+<style>
+.cover {
+   width: 200px;
+   height:200px;
+  position:relative;
+  border-radius: 50%;
+  overflow:hidden;
+  border: 10px solid #ccc;
+  float:left;
+  margin:5px;
+  transition: all 1s;
+-webkit-transition: all 1s; /*Chrome */
+}
+
+.cover:hover{
+   border-color: #00bbe3 ;
+}
+
+.box3d {
+   width: 100%;
+   height:200px;
+  border-radius: 50%;
+  position:absolute;
+  top: 0px;
+  left: 0px;
+  transition: all 1s;
+-webkit-transition: all 1000ms cubic-bezier(0.175, 0.885, 0.320, 1); /* older webkit */
+-webkit-transition: all 1000ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+
+        transition: all 1000ms cubic-bezier(0.175, 0.885, 0.320, 1.275); /* easeOutBack */
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+}
+
+.box3d:first-child {
+   text-align:right;
+  -webkit-transform: rotateY(180deg); /*Chrome */
+}
+
+.cover:hover .box3d{
+    transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg); /*Chrome */
+}
+
+.cover:hover .box3d:first-child{
+   z-index:1;
+   transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg); /* Chrome */
+}
+
+.pic1 {
+   background: url('https://dribbble.s3.amazonaws.com/users/28519/screenshots/921206/00-dribbble-small.png') no-repeat center center;
+}
+
+.pic2 {
+   background: url('https://dribbble.s3.amazonaws.com/users/108/screenshots/921474/filive_iphone_1x.jpg') no-repeat center center;
+}
+
+.pic3 {
+   background: url('https://dribbble.s3.amazonaws.com/users/5253/screenshots/922045/tony_rlv_drib_1x.jpg') no-repeat center center;
+}
+
+.pic4 {
+   background: url('https://dribbble.s3.amazonaws.com/users/167877/screenshots/921482/1.jpg') no-repeat center center;
+}
+</style>
+</html>
