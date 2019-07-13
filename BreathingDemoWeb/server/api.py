@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, current_app
 from flask_socketio import SocketIO, send, emit
 from detector.processor import getCustomPulseApp
 import numpy as np
@@ -17,6 +17,11 @@ args = {
 }
 pulse = getCustomPulseApp(args)
 
+@app.route('/')
+def site():
+    return current_app.send_static_file('client.html')
+
+
 @socketio.on('message')
 def handle_message(message):
     print('received message: ' + message)
@@ -26,15 +31,25 @@ def handle_message(message):
 def handle_frame(b64):
 #    print('data: ' + str(b64))
 
-#    file = 'image'+time.strftime("%H%M%S")+'.png'
+#    file = 'image'+time.strftime("%H%M%S")+'.jpg'
 #    with open(file,"wb") as fh:
-#        fh.write(base64.decodebytes(b64))
-    img = base64.b64decode(b64)
-    img = np.array(list(img))
-    img_array = np.array(img, dtype = np.uint8)
-    frame = cv2.imdecode(img_array, 1)
-    pulse.process(frame)
-
+#        fh.write(base64.b64decode(b64))
+    try:
+        img = base64.b64decode(b64)
+        img = np.array(list(img))
+        img_array = np.array(img, dtype = np.uint8)
+        frame = cv2.imdecode(img_array, 1)
+        imout = pulse.process(frame)
+        retval, buf = cv2.imencode('.jpg',imout)
+        b64out = base64.b64encode(buf)
+      #  file = 'imageout-'+time.strftime("%H%M%S")+'.jpg'
+      #  with open(file,"wb") as fh:
+      #      fh.write(base64.b64decode(b64out))
+      #  print(b64out)
+        emit('response',b64out.decode('utf-8'))
+    except Exception as e:
+        print(e)
+        
 @socketio.on('my event')
 def handle_my_custom_event(json):
     emit('my_response',
@@ -42,5 +57,5 @@ def handle_my_custom_event(json):
     print('received json: ' + str(json))
 
 if __name__ == '__main__':
-    socketio.run(app)
-
+  #  socketio.run(app,host='0.0.0.0',port=3001)
+    app.run()
