@@ -183,11 +183,11 @@ class getCustomPulseApp(object):
         output_frame = self.processor.frame_out
 
         # show the processed/annotated output frame
-        imshow("Processed", output_frame)
+        #imshow("Processed", output_frame)
 
         # create and/or update the raw data display if needed
-        if self.bpm_plot:
-            self.make_bpm_plot()
+        #if self.bpm_plot:
+        self.make_bpm_plot()
 
         if self.send_serial:
             self.serial.write(str(self.processor.bpm) + "\r\n")
@@ -197,7 +197,7 @@ class getCustomPulseApp(object):
 
         # handle any key presses
         self.key_handler()
-
+        return output_frame
 
 
 

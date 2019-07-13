@@ -126,11 +126,11 @@ class findFaceGetPulse(object):
           #      self.frame_out, "Press 'C' to change camera (current: %s)" % str(
           #          cam),
           #      (10, 25), cv2.FONT_HERSHEY_PLAIN, 1.25, col)
-            cv2.putText(
-                self.frame_out, "Press 'S' to lock face and begin",
-                       (10, 50), cv2.FONT_HERSHEY_PLAIN, 1.25, col)
-            cv2.putText(self.frame_out, "Press 'Esc' to quit",
-                       (10, 75), cv2.FONT_HERSHEY_PLAIN, 1.25, col)
+    #        cv2.putText(
+    #            self.frame_out, "Press 'S' to lock face and begin",
+    #                   (10, 50), cv2.FONT_HERSHEY_PLAIN, 1.25, col)
+    #        cv2.putText(self.frame_out, "Press 'Esc' to quit",
+    #                   (10, 75), cv2.FONT_HERSHEY_PLAIN, 1.25, col)
             self.data_buffer, self.times, self.trained = [], [], False
             detected = list(self.face_cascade.detectMultiScale(self.gray,
                                                                scaleFactor=1.3,
@@ -153,20 +153,27 @@ class findFaceGetPulse(object):
             x, y, w, h = forehead1
             cv2.putText(self.frame_out, "Forehead",
                        (x, y), cv2.FONT_HERSHEY_PLAIN, 1.5, col)
+      #      if set(self.face_rect) != set([1, 1, 2, 2]):
+       #         self.find_faces = False
+            if len(detected) > 0:
+                self.find_faces = False
             return
         if set(self.face_rect) == set([1, 1, 2, 2]):
             return
+             
+        cv2.putText(self.frame_out, "Locked! Don't Move", (10, 25), cv2.FONT_HERSHEY_PLAIN, 1.25, col)
+
         #cv2.putText(
         #    self.frame_out, "Press 'C' to change camera (current: %s)" % str(
         #        cam),
         #    (10, 25), cv2.FONT_HERSHEY_PLAIN, 1.25, col)
-        cv2.putText(
-            self.frame_out, "Press 'S' to restart",
-                   (10, 50), cv2.FONT_HERSHEY_PLAIN, 1.5, col)
-        cv2.putText(self.frame_out, "Press 'D' to toggle data plot",
-                   (10, 75), cv2.FONT_HERSHEY_PLAIN, 1.5, col)
-        cv2.putText(self.frame_out, "Press 'Esc' to quit",
-                   (10, 100), cv2.FONT_HERSHEY_PLAIN, 1.5, col)
+     #   cv2.putText(
+     #       self.frame_out, "Press 'S' to restart",
+     #              (10, 50), cv2.FONT_HERSHEY_PLAIN, 1.5, col)
+     #   cv2.putText(self.frame_out, "Press 'D' to toggle data plot",
+     #              (10, 75), cv2.FONT_HERSHEY_PLAIN, 1.5, col)
+     #   cv2.putText(self.frame_out, "Press 'Esc' to quit",
+     #              (10, 100), cv2.FONT_HERSHEY_PLAIN, 1.5, col)
 
         forehead1 = self.get_subface_coord(0.5, 0.18, 0.25, 0.15)
         self.draw_rect(forehead1)

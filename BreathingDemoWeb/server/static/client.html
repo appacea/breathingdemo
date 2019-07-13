@@ -1,0 +1,64 @@
+<html>
+<head>
+    <title>Streamer</title>
+</head>
+<body>
+    <video autoplay></video>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+
+    <script>
+        const FPS = 3;
+        var socket = io('http://localhost:5000');
+        socket.on('connect', function() {
+            socket.emit('my event', {data: 'I\'m connected!'});
+
+            setInterval(() => {
+                var frame = getFrame()
+                if(frame.indexOf('data:image\/jpeg')!==-1){
+                    frame = frame.replace(/^data:image\/jpeg;base64,/, "");
+                    if(frame && frame !== ""){
+                        socket.emit('frame', frame);
+                    }
+                }
+            }, 1000 / FPS);
+        });
+
+        socket.on('my response', function(response) {
+            console.log(response)
+        });
+
+
+        // get video dom element
+        const video = document.querySelector('video');
+        
+        // request access to webcam
+        navigator.mediaDevices.getUserMedia({video: {width: 426, height: 240}}).then((stream) => video.srcObject = stream);
+       
+       
+        // returns a frame encoded in base64
+        const getFrame = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            canvas.getContext('2d').drawImage(video, 0, 0);
+            const data = canvas.toDataURL('image/jpeg');
+            return data;
+        }
+
+
+    /*
+        const WS_URL =  location.origin.replace(/^http/, 'ws');//"ws://192.168.2.40:3000"//
+        const FPS = 3;
+        const ws = new WebSocket(WS_URL);
+        
+    
+        ws.onopen = () => {
+            console.log(`Connected to ${WS_URL}`);
+            setInterval(() => {
+                var frame = getFrame()
+                socket.emit('frame', {data: frame});
+            }, 1000 / FPS);
+        }*/
+    </script>
+</body>
+</html>
