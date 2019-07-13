@@ -58,4 +58,5 @@ def handle_my_custom_event(json):
 
 if __name__ == '__main__':
   #  socketio.run(app,host='0.0.0.0',port=3001)
+    socketio.run(app,host='0.0.0.0')
     app.run()
